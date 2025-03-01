@@ -1,28 +1,16 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentação com Reveal.js</title>
-    <!-- Carregando o CSS do reveal.js da CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
-    <!-- Tema do reveal.js (pode mudar para outro tema) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
-    
-    <!-- Plugin de Markdown -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
-    <style>
-    
-    </style>
-  </head>
-  <body>
+<?php 
+   $title = 'Apresentação Disciplina Compiladores';
+   require('cabecalho.php');
+?>
+
+
     <div class="reveal">
       <div class="slides">
 	<section data-markdown><script type="text/template">
-	# Compiladores
-	### Turma 2025.1
-	### Prof. Luis Carlos
-	### Classroom: gflhe4b
+	### Compiladores
+	#### Turma 2025.1
+	#### Prof. Luis Carlos
+	#### Classroom: gflhe4b
 	---
 	### Apresentação
 	
@@ -246,26 +234,6 @@
       </div>
     </div>
 
-    <!-- Carregando o reveal.js e dependências da CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/markdown/markdown.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@11.4.1/plugin/mermaid/mermaid.js"></script>
-
-    <script>
-      // Inicialização do reveal.js
-      Reveal.initialize({
-        plugins: [RevealMarkdown, RevealHighlight, RevealMermaid],
-        hash: true, // Ativa navegação por hash
-        transition: 'slide', // Transição entre slides
-        // mermaid initialize config
-        mermaid: {
-          // flowchart: {
-          //   curve: 'linear',
-          // },
-    },
-      });
-      mermaid.initialize({ startOnLoad: true });
-    </script>
-  </body>
-</html>
+<?php
+   require('rodape.php');
+?>
