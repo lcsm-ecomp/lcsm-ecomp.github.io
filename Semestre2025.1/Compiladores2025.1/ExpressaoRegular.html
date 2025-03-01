@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validação com Expressão Regular</title>
+  <style>
+    .valid {
+      background-color: lightgreen;
+    }
+    .invalid {
+      background-color: lightcoral;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      width: 300px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Validação de Texto via Expressão Regular</h2>
+  <label for="regex">Expressão Regular (sem ^ e $):</label><br>
+  <input type="text" id="regex" placeholder="Digite a expressão regular" value="[a-zA-Z]+"><br>
+  
+  <label for="texto">Texto para validação:</label><br>
+  <input type="text" id="texto" placeholder="Digite o texto aqui"><br>
+
+  <script>
+    const regexInput = document.getElementById('regex');
+    const textInput = document.getElementById('texto');
+
+    function validate() {
+      let userRegex = regexInput.value;
+      // Envolve a expressão com ^ e $ para que valide toda a entrada.
+      let wrappedRegex = '^' + userRegex + '$';
+      let pattern;
+      try {
+        pattern = new RegExp(wrappedRegex);
+      } catch (e) {
+        // Caso a expressão regular seja inválida, marca o campo de texto como inválido.
+        textInput.classList.remove('valid');
+        textInput.classList.add('invalid');
+        return;
+      }
+      if (pattern.test(textInput.value)) {
+        textInput.classList.remove('invalid');
+        textInput.classList.add('valid');
+      } else {
+        textInput.classList.remove('valid');
+        textInput.classList.add('invalid');
+      }
+    }
+
+    // Atualiza a validação ao modificar a expressão regular ou o texto.
+    regexInput.addEventListener('input', validate);
+    textInput.addEventListener('input', validate);
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <title>Revisão de Conjuntos - Matemática Elementar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/simple.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section data-markdown>
+            <script type="text/markdown">
+            # Revisão de Conjuntos
+            Matemática Elementar para Engenharia da Computação
+            ---
+            ## O que é um conjunto?
+            - Coleção bem definida de elementos.
+            - Notação: ``\( A = \{1, 2, 3\} \)``
+            - Pertencimento:
+              - ``\( 3 \in A \)``
+              - `\(5 \notin A\)`
+            ---
+            ## Tipos de Conjuntos
+            **Especiais:**
+            - Conjunto vazio: `\(\emptyset\)`
+            - Unitário: `\(\{7\}\)`
+            - Finito: `\(\{a, b, c\}\)`
+            - Infinito: `\(\{1, 2, 3, \dots\}\)`
+
+            **Numéricos:**
+            - Naturais: `\(\mathbb{N}\)`
+            - Inteiros: `\(\mathbb{Z}\)`
+            - Racionais: `\(\mathbb{Q}\)`
+            - Reais: `\(\mathbb{R}\)`
+            ---
+            ## Relações entre Conjuntos
+            - Igualdade: `\(A = B\)` se `\(A\)` e `\(B\)` têm os mesmos elementos.
+            - Subconjunto: `\(A \subseteq B\)`
+            - Subconjunto próprio: `\(A \subset B\)`
+            ---
+            ## Operações com Conjuntos
+            - **União:** `\(A \cup B = \{x \mid x \in A \text{ ou } x \in B\}\)`
+            - **Interseção:** `\(A \cap B = \{x \mid x \in A \text{ e } x \in B\}\)`
+            - **Diferença:** `\(A - B = \{x \in A \mid x \notin B\}\)`
+            - **Complemento:** `\(A^c = U - A\)`
+            ---
+            ## Leis Básicas
+            - Associatividade:
+                - `\(A \cup (B \cup C) = (A \cup B) \cup C\)`
+            - Comutatividade:
+                - `\(A \cup B = B \cup A\)`
+            - Distributividade:
+                - `\(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\)`
+            - Leis de De Morgan:
+                - `\((A \cup B)^c = A^c \cap B^c\)`
+                - `\((A \cap B)^c = A^c \cup B^c\)`
+            ---
+            ## Diagramas de Venn
+            ![Venn](https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Venn0110.svg/200px-Venn0110.svg.png)
+            - União, Interseção e Diferença podem ser visualizadas.
+            ---
+            ## Conjunto das Partes
+            - `\(P(A)\)` é o conjunto de todos os subconjuntos de `\(A\)`.
+            - Exemplo: `\(A = \{1, 2\}\)`
+                - `\(P(A) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}\)`
+            ---
+            ## Cardinalidade
+            - Número de elementos de `\(A\)`: `\(|A|\)`
+            - Exemplo: `\(A = \{1, 2, 3\}\)` ⟹ `\(|A| = 3\)`
+            - Cardinalidade do conjunto das partes: `\(|P(A)| = 2^{|A|}\)`
+            ---
+            ## Exercícios
+            1. Dados `\(A = \{a, b, c\}\)` e `\(B = \{b, c, d\}\)`:
+                - Calcule `\(A \cup B\)`, `\(A \cap B\)` e `\(A - B\)`.
+            2. Se `\(U = \{a, b, c, d, e\}\)`, qual é o complemento de `\(A\)`?
+            3. Liste `\(P(\{1, 2, 3\})\)`.
+            </script>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/markdown/markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.js"></script>
+<script>
+    Reveal.initialize({
+
+        plugins: [RevealMarkdown, RevealHighlight,RevealMath.KaTeX],
+        hash: true, // Ativa navegação por hash
+        transition: 'slide', // Transição entre slides
+      });
+</script>
+
+</body>
+</html>
+

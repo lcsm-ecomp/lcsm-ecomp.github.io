@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação com Reveal.js</title>
+    <!-- Carregando o CSS do reveal.js da CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <!-- Tema do reveal.js (pode mudar para outro tema) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/simple.min.css">
+    
+    <!-- Plugin de Markdown -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section data-markdown>
+          <script type="text/template">
+            # Valores e Expressões
+            - Definir Valores
+            - Principais valores
+            - Expressões
+            - Avaliação Tardia / Eager
+            - Operações / Expressões Lambda
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # Valor
+            Definição: Um valor é tudo em uma linguagem de programação que:
+            - Representa informações
+            - São argumentos/resultados de operações
+            - Pode ser associada a variáveis e armazenada em memória
+            - Pode ser lida/visualizada via E/S.
+          </script>
+        </section>
+        <section>
+        
+        <section data-markdown>
+          <script type="text/template">
+            # Tipo de Valores
+            
+            - Atômicos
+            - Composição Homogênea
+            - Composição Heterogênea
+            - Funções
+            - Valores Recursivos.
+          </script>
+        </section>
+	<section data-markdown><script type="text/template">
+            ### Valores Atômicos
+            - Representam valores que não podem ser divididos em valores mais simples.
+            
+            - Exemplos:
+              - Valores Primitivos: 1, 2, true, 1.2, 'a', etc.
+              - Valores Enumerados: SEGUNDA, JANEIRO, etc.
+            
+            - Valores não atômicos são considerados compostos....
+        </script></section>
+	<section data-markdown><script type="text/template">
+            ### Composição Homogênea
+            - Combinam um ou mais valores de MESMO tipos.
+            
+            - Exemplos:
+              - Vetores: [1,2,3,4,5]
+            
+            - Operações princiais:
+              - composição: [1,2,3,4,5]
+              - seleção: v[1] = 2
+        </script></section>
+
+	<section data-markdown><script type="text/template">
+            ### Composição Heterogênea
+            
+            - Combinam um ou mais valores de tipos DIFERENTES.
+            
+            - Exemplos:
+              - Tuplas: (1, True, "Luis")
+            
+            - Operações princiais:
+              - composição: (1, True, "Luis")
+              - seleção: first (1, True, "Luis") = 1
+        </script></section>
+	<section data-markdown><script type="text/template">
+          ### Funções
+          - Retornam um valor de IMAGEM a partir de um (ou mais) argumentos de um DOMINIO.
+            
+          - Exemplos:
+            - Funções: {1 -> 2,}
+            
+          - Operações princiais:
+            - criação: f(x) = 2*x
+            - projeção: f(2) = 4
+        </script></section>
+
+  
+	</section>
+	
+	
+        <section>
+        <section data-markdown><script type="text/template">
+        ### Expressões
+        - Principal estrutura de uma linguagem de programação associada aos valores
+        - Uma expressão é uma entidade que, ao ser AVALIADA, retorna um valor
+        - Tipos de Expressões
+          - Valores
+          - Operações
+          - Seleção
+          - Repetição
+        </script></section>
+
+        <section data-markdown><script type="text/template">
+        ### Valores
+        - Um valor é uma expressão na linguagem.
+        - Exemplos:
+          - 10 
+          - "teste"
+          - True
+        </script></section>
+        <section data-markdown><script type="text/template">
+        ### Operações
+        - Um operador junto com parâmetros são expressões de uma linguagem
+        - Os parâmetros e o operador são avaliados e a operação é executada recebendo os argumentos.
+        - Operador <> Operação
+        - Parâmetros <> Argumentos 
+        - Exemplos:
+          - pre-fixa: sqrt 10 
+          - infixa: 10 + 4
+          - pós-fixa: 10 km
+        </script></section>
+        <section data-markdown><script type="text/template">
+        ### Seleção
+        - Uma expressão condicional ao ser avaliada escolhe uma entre várias opções como resultado a partir de uma condição.
+        - Exemplos:
+          - C/Java: (1==2)?5:0
+          - Kotlin: if (1==2) 5 else 0
+          - Python: 5 if 1==2 else 0
+        </script></section>
+        <section data-markdown><script type="text/template">
+        ### Repetição
+        - Uma expressão de repetição ao ser avaliada cria um valor composto a partir de uma lei de formação.
+        - Exemplos:
+          - Python: [2*x+1 for x in range(1,10) ]
+        </script></section>
+        
+        </section>
+        <section>
+
+        </section>
+      </div>
+    </div>
+
+    <!-- Carregando o reveal.js e dependências da CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script>
+      // Inicialização do reveal.js
+      Reveal.initialize({
+        plugins: [RevealMarkdown, RevealHighlight],
+        hash: true, // Ativa navegação por hash
+        transition: 'slide', // Transição entre slides
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <title>Revisão - Lógica Proposicional</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/simple.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section data-markdown>
+            <script type="text/markdown">
+            # Revisão: Lógica Proposicional
+            Matemática Discreta - Engenharia da Computação
+            ---
+            ## O que é Lógica Proposicional?
+            - Estudo de proposições e suas **conectividades**.
+            - Proposição: **frase declarativa** que é verdadeira (V) ou falsa (F), mas nunca ambos.
+            - Exemplos:
+                - "Hoje é terça-feira." (proposição)
+                - "Passe o sal." (não é proposição)
+            ---
+            ## Operadores Lógicos (Conectivos)
+            | Operador | Notação | Nome | Exemplo |
+            |---|---|---|---|
+            | Negação | ¬p | **Não** p | p: "Chove" ⟹ ¬p: "Não chove" |
+            | Conjunção | p ∧ q | **E** | "Chove e faz frio" |
+            | Disjunção | p ∨ q | **Ou** | "Chove ou faz frio" |
+            | Condicional | p → q | **Se... então** | "Se chove, então levo guarda-chuva" |
+            | Bicondicional | p ↔ q | **Se e somente se** | "Você passa se e somente se acertar 60%" |
+            ---
+            ## Tabelas Verdade
+            ### Negação
+            | p | ¬p |
+            |---|---|
+            | V | F |
+            | F | V |
+            ---
+            ## Tabela Verdade (continuação)
+
+            ### Conjunção
+            | p | q | p ∧ q |
+            |---|---|---|
+            | V | V | V |
+            | V | F | F |
+            | F | V | F |
+            | F | F | F |
+
+            ---
+            ## Tabela Verdade (continuação)
+            ### Disjunção
+            | p | q | p ∨ q |
+            |---|---|---|
+            | V | V | V |
+            | V | F | V |
+            | F | V | V |
+            | F | F | F |
+            ---
+            ## Tabela Verdade (continuação)
+
+            ### Condicional
+            | p | q | p → q |
+            |---|---|---|
+            | V | V | V |
+            | V | F | F |
+            | F | V | V |
+            | F | F | V |
+
+            ---
+            ## Condicional - Por que F → V é verdadeiro?
+            - Porque uma proposição falsa implica qualquer coisa.
+            - Isso é uma **convenção lógica**, usada para manter consistência com a matemática formal.
+            - Exemplo: "Se 2 é ímpar, então 2 é primo". A frase é verdadeira porque a hipótese é falsa.
+
+            ---
+            ## Tabela Verdade (continuação)
+            ### Bicondicional
+            | p | q | p ↔ q |
+            |---|---|---|
+            | V | V | V |
+            | V | F | F |
+            | F | V | F |
+            | F | F | V |
+
+            ---
+            ## Tautologias e Contradições
+            - **Tautologia**: expressão sempre verdadeira.
+            - **Contradição**: expressão sempre falsa.
+            - Exemplo de tautologia:
+            \[
+            p \vee \neg p
+            \]
+            ---
+            ## Leis da Lógica (Algumas Importantes)
+            - Identidade: `\)p ∧ V = p\) e `\)p ∨ F = p\)
+            - Dominação: `\)p ∨ V = V\) e `\)p ∧ F = F\)
+            - Idempotência: `\)p ∨ p = p\) e `\)p ∧ p = p\)
+            - Involução: ¬(¬p) = p
+            ---
+            ## Leis da Lógica (Algumas Importantes)
+            - De Morgan:
+            \[
+            ¬(p ∧ q) = ¬p ∨ ¬q
+            \]
+            \[
+            ¬(p ∨ q) = ¬p ∧ ¬q
+            \]
+            ---
+            ## Equivalências Lógicas
+            - Duas expressões são logicamente equivalentes se têm a mesma tabela verdade.
+            - Exemplo:
+            \[
+            p → q \equiv ¬p ∨ q
+            \]
+            ---
+            ## Argumentos e Validade
+            - **Argumento**: sequência de proposições, com premissas e uma conclusão.
+            - Argumento é **válido** se, sempre que todas as premissas forem verdadeiras, a conclusão também for verdadeira.
+            - Exemplo:
+                1. Se estudo, passo (p → q)
+                2. Estudo (p)
+                3. Logo, passo (q)
+
+            ---
+            ## Exercícios
+            1. Construa a tabela verdade de:
+                - \[(p ∧ q) → (p ∨ q)\]
+            2. Use as Leis de De Morgan para reescrever:
+                - ¬(p ∨ q)
+            3. Avalie a validade do argumento:
+                - Se chove, levo guarda-chuva.
+                - Não levo guarda-chuva.
+                - Logo, não chove.
+
+            </script>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/markdown/markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+<script>
+    Reveal.initialize({
+        plugins: [RevealMarkdown, RevealHighlight,RevealMath.KaTeX],
+        hash: true, // Ativa navegação por hash
+        transition: 'slide', // Transição entre slides
+      });
+</script>
+
+</body>
+</html>
+

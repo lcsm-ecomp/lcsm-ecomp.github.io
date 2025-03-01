@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disciplina de Matemática Discreta - Turma 2025.1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f0f8ff;
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            background-color: #004080;
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #004080;
+            border-bottom: 2px solid #004080;
+            padding-bottom: 5px;
+        }
+        .info-box {
+            background-color: #e6f3ff;
+            padding: 15px;
+            border-left: 5px solid #004080;
+            margin: 15px 0;
+        }
+        .schedule {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .schedule td, .schedule th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .schedule th {
+            background-color: #004080;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Disciplina: Matemática Discreta</h1>
+        <h3>Engenharia da Computação</h3>
+        <p>Turma 2025/1 - Professor: Luis Carlos</p>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <h2>Informações Gerais</h2>
+            <div class="info-box">
+                <p><strong>Período Letivo:</strong> 2025/1</p>
+                <p><strong>Carga Horária:</strong> 60 horas</p>
+                <p><strong>Pré-requisitos:</strong> Lógica </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Ementa do Curso</h2>
+            <ul>
+                <li>Introdução à construção de compiladores</li>
+                <li>Análise léxica</li>
+                <li>Análise sintática</li>
+                <li>Análise semântica</li>
+                <li>Interpretatpor de Código</li>
+                <li>Geração de código intermediário</li>
+                <li>Otimização de código</li>
+                <li>Projeto prático de compilador</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Bibliografia</h2>
+            <ul>
+            <li>AHO, A. V. et al. Compiladores: princípios, técnicas e ferramentas. 2. ed. São Paulo: Pearson, 2008. E-book. Disponível em: https://plataforma.bvirtual.com.br. Acesso em: 26 fev. 2025.
+            <li>Appel, Andrew W. Modern Compiler Implementation in Java: Basic Techniques. 1997
+            <li>Ferramenta ANTLR. <a href="http://www.antlr.org">http://www.antlr.org</a>
+            <li>Ferramenta XText. <a href="https://eclipse.dev/Xtext/">https://eclipse.dev/Xtext/</a>
+	  
+            </ul>
+	</div>
+        <div class="section">
+            <h2>Cronograma Inicial</h2>
+            <table class="schedule">
+                <tr>
+                    <th>Aulas</th>
+                    <th>Tópico</th>
+                    <th>Atividades</th>
+                    <th>Material</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Introdução aos Compiladores</td>
+                    <td>
+                    <ul>
+                    <li>Apresentação da disciplina
+                    <li>Motivação
+                    <li>Fases de um Compilador Tradicional
+                    </ul>
+                    <td>
+                </tr>
+                <tr>
+                    <td>2-4</td>
+                    <td>Análise Léxica</td>
+                    <td>
+                    <ul>
+                    <li>Expressões Regulares
+                    <li>Autômatos Finitos
+                    <li>Descrições Léxicas
+                    <li>Implementação de scanner
+                    </ul>
+                    <td>
+                </tr>
+                <tr>
+                    <td>5-7</td>
+                    <td>Análise Sintática</td>
+                    <td>
+                    <ul>
+                    <li>Gramáticas Livres de Contextos
+                    <li>Analisadores Descendentes e Ascendentes
+                    <li>Descrições Léxicas
+                    <li>Ferramenta ANTLR
+                    </ul>
+                    <td>
+                </tr>
+                <tr>
+                    <td>8-10</td>
+                    <td>Interpretação</td>
+                    <td>
+                    <ul>
+                    <li>Manipulação de Árvores
+                    <li>Manipulação da Tabela de Simbolos
+                    <li>Interpretador de Expressões
+                    <li>Interpretador de Comandos
+                    <li>Aula Prática
+                    </ul>
+                    <td>
+                </tr>
+                <tr>
+                    <td>11-13</td>
+                    <td>Análise Semântica</td>
+                    <td>
+                    <ul>
+                    <li>Declarações
+                    <li>Exemplo de Analisador Semantico
+                    </ul>
+                    <td>
+                </tr>
+                <tr>
+                    <td>14-16</td>
+                    <td>1a Avaliação</td>
+                    <td>
+                    <td>
+                </tr>
+         	<tr>
+                    <td>17-20</td>
+                    <td>Geração de Código</td>
+                    <td>
+                    <ul>
+                    <li>Uma linguagem Assembly Virtual
+                    <li>Exemplos de Geração de Código
+                    <li>Aula Prática Compilador GCC
+                    </ul>
+                    <td>
+                </tr>
+         	<tr>
+                    <td>21-22</td>
+                    <td>Otimização de Código</td>
+                    <td>
+                    <ul>
+                    <li>Técnicas de Otimização
+                    <li>Aula Prática Compilador GCC
+                    </ul>
+                    <td>
+                </tr>
+         	<tr>
+                    <td>23-30</td>
+                    <td>Tópicos Avançados</td>
+                    <td>
+                    <ul>
+                    <li>Desenvolvimento Orientado a Modelos
+                    <li>Ferramenta XText -- Geração de Ambientes
+                    <li>Tecnologias XML
+                    </ul>                   
+                    <td>
+                </tr>
+         	<tr>
+                    <td>31-36</td>
+                    <td>Avaliação</td>
+                    <td>
+                    <ul>
+                    <li>Projeto da Disciplina
+                    <li>2a Avaliação Escrita
+                    <td>
+                    </ul>                   
+                </tr>
+         	       
+                <!-- Adicione mais linhas conforme necessário -->
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>

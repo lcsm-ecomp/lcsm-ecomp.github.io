@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Analisador Léxico</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    textarea { width: 100%; height: 120px; margin-bottom: 10px; }
+    .resultado { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+    button { padding: 10px 20px; font-size: 16px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Analisador Léxico</h1>
+  <h2>Descrição Léxica</h2>
+  <textarea id="lexdesc">
+[0-9]+     --> NUM
+"+"         --> PLUS
+" "|\n      --> 
+  </textarea>
+
+  <h2>Programa</h2>
+  <textarea id="program">123+456</textarea>
+  
+  <button onclick="analyze()">Compilar</button>
+  <button onclick="share()">Share</button>
+  
+  <div id="result" class="resultado"></div>
+
+  <script>
+    // Função para escapar caracteres especiais em uma string para uso em regex
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Função para ler a descrição léxica e compilar as regras
+    function parseLexDescription(desc) {
+      const rules = [];
+      const lines = desc.split('\n');
+      for (let line of lines) {
+        line = line.trim();
+        if (line === '') continue; // ignora linhas vazias
+        // Separa a linha pelo separador '-->'
+        const parts = line.split('-->');
+        if (parts.length < 1) continue;
+        let pattern = parts[0].trim();
+        let token = parts[1] ? parts[1].trim() : '';
+        
+        // Se o padrão estiver totalmente entre aspas, trata-o como literal
+        if (pattern.startsWith('"') && pattern.endsWith('"')) {
+          pattern = pattern.substring(1, pattern.length - 1);
+          pattern = escapeRegex(pattern);
+        } else {
+          // Para padrões que contenham partes literais entre aspas, substitui cada ocorrência
+          pattern = pattern.replace(/"([^"]*)"/g, function(match, p1) {
+            return escapeRegex(p1);
+          });
+        }
+        
+        // Cria uma expressão regular ancorada no início da string
+        try {
+          const regex = new RegExp('^(' + pattern + ')');
+          rules.push({regex: regex, token: token});
+        } catch(e) {
+          alert('Erro ao compilar a expressão regular: ' + pattern + '\n' + e);
+        }
+      }
+      return rules;
+    }
+
+    // Função que realiza a análise léxica do programa
+    function analyze() {
+      const lexdesc = document.getElementById('lexdesc').value;
+      const program = document.getElementById('program').value;
+      const rules = parseLexDescription(lexdesc);
+      let pos = 0;
+      const tokens = [];
+      
+      while (pos < program.length) {
+        let matchFound = false;
+        let maxMatch = "";
+        let chosenRule = null;
+        // Testa todas as regras para encontrar o maior trecho que casa
+        for (let rule of rules) {
+          const result = rule.regex.exec(program.slice(pos));
+          if (result && result[0].length > maxMatch.length) {
+            maxMatch = result[0];
+            chosenRule = rule;
+            matchFound = true;
+          }
+        }
+        // Se nenhuma regra casou com a posição atual, exibe erro
+        if (!matchFound || maxMatch === "") {
+          document.getElementById('result').innerText = 
+            'Erro: sequência inválida na posição ' + pos + ": '"+ program.substring(pos,pos+10)+"'";
+          return;
+        }
+        // Se a regra possuir um token (não for vazio) adiciona à lista
+        if (chosenRule.token !== "") {
+          tokens.push(chosenRule.token + '("' + maxMatch + '")');
+        }
+        pos += maxMatch.length;
+      }
+      document.getElementById('result').innerText = tokens.join(' ');
+    }
+    
+    // Função para gerar uma URL com os estados dos editores
+    function share() {
+      const lexdesc = document.getElementById('lexdesc').value;
+      const program = document.getElementById('program').value;
+      const baseUrl = window.location.href.split('?')[0];
+      const url = baseUrl + '?lex=' + encodeURIComponent(lexdesc) + '&prog=' + encodeURIComponent(program);
+      prompt("Compartilhe este URL:", url);
+    }
+    
+    // Ao carregar a página, verifica se há parâmetros na URL e inicializa os editores
+    window.onload = function() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('lex')) {
+        document.getElementById('lexdesc').value = params.get('lex');
+      }
+      if (params.has('prog')) {
+        document.getElementById('program').value = params.get('prog');
+      }
+    }
+  </script>
+</body>
+</html>
+

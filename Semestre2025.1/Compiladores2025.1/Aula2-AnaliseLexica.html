@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação com Reveal.js</title>
+    <!-- Carregando o CSS do reveal.js da CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <!-- Tema do reveal.js (pode mudar para outro tema) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+    
+    <!-- Plugin de Markdown -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
+    <style>
+    .lexica table td, .lexica table th {
+	text-align:center;
+	border:none;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+	<section data-markdown><script type="text/template">
+	### Fases de um Compilador: Análise Léxica
+	- Definições
+	- Expressões Regulares
+	- Descrições Léxicas
+	- Exemplos
+	---
+
+	### Análise Léxica
+	Funções:
+	- Quebra o código fonte em Tokens (Palavras)
+	- Remove elementos que não afetam o significado do programa (espaços e comentários)
+	Vantagens:
+	- Simplificar o código processado pelo compilador.
+	---
+	### Análise Léxica
+	Exemplos
+	<table class="lexica" style="">
+	<tr>
+	<th > Código Fonte
+	<th >
+	<th > Tokens
+	</tr>
+	<tr>
+	<td>
+	10 + 5 * 3
+	<td> &rArr;
+	<td> NUM SUM <br> NUM MULT NUM
+	</tr>
+	<tr>
+	<td>
+	repeat 10 [<br>...forward 10 <br>...left 90 <br>]
+	<td> &rArr;
+	<td> REP NUM ACOL <br> FD NUM LT NUM FCOL
+	</tr> 
+	</table>
+        </script></section>
+        <section data-markdown><script  type="text/template">
+	### Expressões Regulares
+	- Formalismo utilizado para descrever padrões de caracteres
+	- Baseado em operadores que combinam linguagens (operadores regulares)
+	---
+	### Operadores Regulares
+	- Expressões Fundamentais:
+	  - "str": Toda string é uma expressão regular que reconhece a própria string;
+	  - &epsilon;: Reconhece a string vazia;
+	---
+	### Combinadores Principais:
+	- Escolha ( A | B ): Reconhece uma string reconhecida para expressão A ou pela expressão B
+	- Concatenação (A . B): Reconhece uma cadeia formada pela concatenação de uma string reconhecida por A e uma string reconhecida por B
+	- Repetição ( A * ): Reconhece uma cadeida formada pela concatenação de uma ou mais palavras reconhecidas pela expressão A.
+	---
+	### Outros combinadores
+	- Opcional (A ?)
+	- Repetição (A +)
+	- Escolha de um caracteres ([abc])
+	- Escolha de uma Faixa ([a-z])
+	- Inicio da palavra (^)
+	- Fim da palavra ($)
+	---
+	### Mais informações
+	- Wikipedia (https://en.wikipedia.org/wiki/Regular_expression)
+	---
+	### Implementações de Expressões
+	- Expressões regulares são implementadas na maioria das linguagens como forma de buscar padrões em strings
+	- HTML
+	```HTML
+	style {
+	    input:valid { background-color: green; }
+	    input:invalid { background-color: red; }
+	}
+	<input pattern="[a-z]+">
+	```
+	---
+	### Implementações de Expressões
+	- Expressões regulares são implementadas na maioria das linguagens como forma de buscar padrões em strings
+	- Java
+	```Java
+	    void teste() {
+	        String num = "1245a";
+	        System.out.println(num.match("[0-9]+"));
+	    }
+	```
+	</script></section>
+
+      	</div>
+    	</div>
+
+    <!-- Carregando o reveal.js e dependências da CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@11.4.1/plugin/mermaid/mermaid.js"></script>
+
+    <script>
+      // Inicialização do reveal.js
+      Reveal.initialize({
+        plugins: [RevealMarkdown, RevealHighlight, RevealMermaid],
+        hash: true, // Ativa navegação por hash
+        transition: 'slide', // Transição entre slides
+        // mermaid initialize config
+        mermaid: {
+          // flowchart: {
+          //   curve: 'linear',
+          // },
+    },
+      });
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <title>Revisão - Conjuntos Numéricos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/white.css" id="theme">
+</head>
+
+<body>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section data-markdown>
+            <script type="text/markdown">
+            # Revisão: Conjuntos Numéricos
+            Matemática Elementar para Engenharia da Computação
+            ---
+            ## Conjuntos Numéricos - Visão Geral
+            - `\(\mathbb{N}\)`: Naturais (contagem)
+            - `\(\mathbb{Z}\)`: Inteiros (positivos, negativos e zero)
+            - `\(\mathbb{Q}\)`: Racionais (frações)
+            - `\(\mathbb{R}\)`: Reais (racionais + irracionais)
+
+            Hierarquia:
+            \[
+            \mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}
+            \]
+            ---
+            ## Conjunto dos Naturais `\(\mathbb{N}\)`
+            - Números para **contar** objetos: `\(0, 1, 2, 3, \dots\)`
+            - Algumas definições omitem o `\(0\)`, usando `\(\mathbb{N}^*\)` ou `\(\mathbb{N}^+\)` para naturais não nulos.
+            - Principais operações:
+                - Adição e multiplicação: sempre resultam em naturais.
+                - Subtração: nem sempre resulta em natural (5 - 7 não é natural).
+
+            ---
+            ## Conjunto dos Inteiros `\(\mathbb{Z}\)`
+            - Integra naturais, seus opostos e o zero.
+            - \[
+            \mathbb{Z} = \{\dots, -3, -2, -1, 0, 1, 2, 3, \dots\}
+            \]
+            - Operações:
+                - Soma, subtração e multiplicação: sempre fechadas em `\(\mathbb{Z}\)`.
+                - Divisão: pode sair de `\(\mathbb{Z}\)` (ex: `\(3 \div 2\)`).
+
+            ---
+            ## Conjunto dos Racionais `\(\mathbb{Q}\)`
+            - Frações: números que podem ser escritos como:
+            \[
+            \frac{p}{q} \text{ com } p \in \mathbb{Z}, \ q \in \mathbb{Z} \setminus \{0\}
+            \]
+            - Exemplos: `\( \frac{1}{2}, -3, 0, 0.75 \)`
+            - Dízimas periódicas são racionais.
+
+            ---
+            ## Conjunto dos Reais `\(\mathbb{R}\)`
+            - Todos os racionais **e mais** os irracionais.
+            - Números irracionais: não podem ser escritos como fração simples.
+            - Exemplos:
+                - `\(\pi\)`, `\(\sqrt{2}\)`, `\(e\)`
+
+            ---
+            ## Propriedades Comuns (Leis Básicas)
+            | Propriedade | Adição | Multiplicação |
+            |---|---|---|
+            | Fechamento | `\(a, b \in X \implies a + b \in X\)` | `\(a, b \in X \implies a \cdot b \in X\)` |
+            | Associatividade | `\((a + b) + c = a + (b + c)\)` | `\((a \cdot b) \cdot c = a \cdot (b \cdot c)\)` |
+            | Comutatividade | `\(a + b = b + a\)` | `\(a \cdot b = b \cdot a\)` |
+            | Elemento Neutro | `\(a + 0 = a\)` | `\(a \cdot 1 = a\)` |
+            | Elemento Oposto | `\(a + (-a) = 0\)` | - |
+            | Distributiva | - | `\(a \cdot (b + c) = a \cdot b + a \cdot c\)` |
+
+            ---
+            ## Subconjuntos Importantes em `\(\mathbb{R}\)`
+            - Números naturais: `\(\mathbb{N}\)`
+            - Números inteiros: `\(\mathbb{Z}\)`
+            - Números racionais: `\(\mathbb{Q}\)`
+            - Números irracionais: `\(\mathbb{R} \setminus \mathbb{Q}\)`
+
+            ---
+            ## Comparação e Ordem
+            - Todo número real pode ser comparado com outro:
+            \[
+            a < b, \ a = b \text{ ou } a > b
+            \]
+            - Em `\(\mathbb{N}\)`, `\(\mathbb{Z}\)`, `\(\mathbb{Q}\)` e `\(\mathbb{R}\)`, há uma ordem total.
+
+            ---
+            ## Densidade em `\(\mathbb{Q}\)` e `\(\mathbb{R}\)`
+            - Entre quaisquer dois números reais diferentes, existe um número racional.
+            - Exemplo:
+            \[
+            1 < 1.5 < 2
+            \]
+            ---
+            ## Operações Básicas
+            - Soma e multiplicação: sempre bem definidas.
+            - Subtração: naturais não são fechados (5 - 7 não é natural).
+            - Divisão: inteiros não são fechados (3 ÷ 2 não é inteiro).
+
+            ---
+            ## Exercícios
+            1. Classifique os números como naturais, inteiros, racionais, reais:
+                - `\(5\)`, `\(-3\)`, `\(\frac{7}{2}\)`, `\(\sqrt{2}\)`
+            2. Qual conjunto é fechado para:
+                - Adição?  
+                - Subtração?  
+                - Multiplicação?  
+                - Divisão?
+            3. É verdade que `\(\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}\)`? Justifique.
+            </script>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/markdown/markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/math/math.min.js"></script>
+<script>
+    Reveal.initialize({
+        plugins: [RevealMarkdown, RevealHighlight,RevealMath.KaTeX],
+        hash: true, // Ativa navegação por hash
+        transition: 'slide', // Transição entre slides
+      });
+</script>
+
+</body>
+</html>
+

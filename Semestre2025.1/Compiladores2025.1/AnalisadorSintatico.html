@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Analisador Sintático com Derivação Completa</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    textarea, input[type="text"] { width: 100%; margin-bottom: 10px; }
+    .resultado { 
+      margin-top: 20px; 
+      padding: 10px; 
+      border: 1px solid #ccc; 
+      background: #f9f9f9; 
+      white-space: pre-wrap; 
+    }
+    button { padding: 10px 20px; font-size: 16px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Analisador Sintático com Derivação Completa</h1>
+  
+  <h2>Gramática</h2>
+  <textarea id="grammar" placeholder="Exemplo:
+exp --> exp PLUS exp
+exp --> NUM"></textarea>
+  
+  <h2>Não terminal inicial</h2>
+  <input type="text" id="startSymbol" placeholder="ex: exp" value="exp">
+  
+  <h2>Sequência de Tokens</h2>
+  <textarea id="tokens" placeholder='Exemplo: NUM("123") PLUS("+") NUM("456")'></textarea>
+  
+  <button onclick="parseInput()">Validar</button>
+  <button onclick="share()">Share</button>
+  
+  <div id="result" class="resultado"></div>
+  
+  <script>
+    // Constrói a gramática a partir do texto digitado.
+    // Cada linha deve ter o formato: A --> B C ...
+    function parseGrammar(grammarText) {
+      const grammar = {};
+      const lines = grammarText.split('\n');
+      for (let line of lines) {
+        line = line.trim();
+        if (line === '') continue;
+        const parts = line.split('-->');
+        if (parts.length < 2) continue;
+        const lhs = parts[0].trim();
+        const rhsSymbols = parts[1].trim().split(/\s+/).filter(s => s !== '');
+        if (!grammar[lhs]) {
+          grammar[lhs] = [];
+        }
+        grammar[lhs].push(rhsSymbols);
+      }
+      return grammar;
+    }
+    
+    // Processa a sequência de tokens: extrai os nomes (ex.: NUM, PLUS, etc).
+    function parseTokens(tokensText) {
+      const tokens = [];
+      const parts = tokensText.trim().split(/\s+/);
+      for (let part of parts) {
+        // Se o token estiver no formato TOKEN("..."), extraímos o nome antes do parênteses.
+        const m = part.match(/^(\w+)\(/);
+        if (m) {
+          tokens.push(m[1]);
+        } else {
+          tokens.push(part);
+        }
+      }
+      return tokens;
+    }
+    
+    // Implementação do algoritmo Earley com backpointers para construção da árvore de derivação.
+    // Cada item possui: { lhs, rhs (array), dot, start, children }
+    function earleyParse(grammar, startSymbol, tokens) {
+      const augmentedStart = "S'";
+      // Cria uma gramática aumentada, adicionando S' --> startSymbol
+      const grammarAug = Object.assign({}, grammar);
+      grammarAug[augmentedStart] = [[startSymbol]];
+      
+      const n = tokens.length;
+      const chart = [];
+      for (let i = 0; i <= n; i++) {
+        chart.push([]);
+      }
+      
+      // Função para criar uma chave única para cada item (evita duplicatas)
+      function itemKey(item) {
+        return item.lhs + '->' + item.rhs.join(' ') + ',dot=' + item.dot + ',start=' + item.start;
+      }
+      
+      // Adiciona um item ao chart[i] se ainda não foi adicionado.
+      function addToChart(i, item) {
+        const key = itemKey(item);
+        if (!chart[i]._keys) chart[i]._keys = {};
+        if (!chart[i]._keys[key]) {
+          chart[i].push(item);
+          chart[i]._keys[key] = true;
+          return true;
+        }
+        return false;
+      }
+      
+      // Inicializa o chart[0] com o item inicial aumentado.
+      addToChart(0, { lhs: augmentedStart, rhs: [startSymbol], dot: 0, start: 0, children: [] });
+      
+      // Processa cada posição da entrada.
+      for (let i = 0; i <= n; i++) {
+        for (let j = 0; j < chart[i].length; j++) {
+          const item = chart[i][j];
+          if (item.dot < item.rhs.length) {
+            const nextSymbol = item.rhs[item.dot];
+            // Predictor: se o próximo símbolo é um não terminal.
+            if (grammarAug[nextSymbol]) {
+              for (let prod of grammarAug[nextSymbol]) {
+                addToChart(i, { lhs: nextSymbol, rhs: prod, dot: 0, start: i, children: [] });
+              }
+            } else {
+              // Scanner: o próximo símbolo é terminal e deve casar com o token atual.
+              if (i < n && tokens[i] === nextSymbol) {
+                const newItem = {
+                  lhs: item.lhs,
+                  rhs: item.rhs,
+                  dot: item.dot + 1,
+                  start: item.start,
+                  children: (item.children ? item.children.slice() : []).concat([{ leaf: tokens[i] }])
+                };
+                addToChart(i + 1, newItem);
+              }
+            }
+          } else {
+            // Completer: item completo; procura itens que estavam esperando por este não terminal.
+            for (let it of chart[item.start]) {
+              if (it.dot < it.rhs.length && it.rhs[it.dot] === item.lhs) {
+                const newItem = {
+                  lhs: it.lhs,
+                  rhs: it.rhs,
+                  dot: it.dot + 1,
+                  start: it.start,
+                  children: (it.children ? it.children.slice() : []).concat([item])
+                };
+                addToChart(i, newItem);
+              }
+            }
+          }
+        }
+      }
+      
+      // Procura no chart final (chart[n]) um item que corresponda a S' completo.
+      for (let item of chart[n]) {
+        if (item.lhs === augmentedStart && item.dot === item.rhs.length && item.start === 0) {
+          return item; // Retorna o item aceito – sua propriedade "children" contém a árvore de derivação.
+        }
+      }
+      return null;
+    }
+    
+    // Gera os passos da derivação (leftmost) a partir da árvore de derivação.
+    // Em cada passo, mostra a regra aplicada e a cadeia resultante.
+    function generateDerivationSteps(parseTree) {
+      const steps = [];
+      
+      // Função auxiliar para representar um nó (terminal ou não terminal) como string.
+      function nodeToString(node) {
+        return node.leaf ? node.leaf : node.lhs;
+      }
+      
+      // Inicia com a cadeia contendo apenas o símbolo inicial (árvore completa).
+      let currentForm = [parseTree];
+      steps.push("Inicial: " + currentForm.map(nodeToString).join(" "));
+      
+      // Enquanto houver nós não-terminais na cadeia, substitui o primeiro (leftmost) por sua expansão.
+      while (currentForm.some(node => !node.leaf)) {
+        let index = currentForm.findIndex(node => !node.leaf);
+        let node = currentForm[index];
+        // Define a regra aplicada.
+        let prodRule = node.lhs + " --> " + node.children.map(child => nodeToString(child)).join(" ");
+        // Substitui o nó não-terminal por seus filhos.
+        currentForm.splice(index, 1, ...node.children);
+        // Registra a aplicação da regra e o novo estado da cadeia.
+        steps.push("Aplicação: " + prodRule);
+        steps.push("Cadeia: " + currentForm.map(nodeToString).join(" "));
+      }
+      return steps;
+    }
+    
+    // Função principal: lê os inputs, processa e mostra o resultado e, se válido, a derivação completa.
+    function parseInput() {
+      const grammarText = document.getElementById('grammar').value;
+      const startSymbol = document.getElementById('startSymbol').value.trim();
+      const tokensText = document.getElementById('tokens').value;
+      
+      if (!grammarText || !startSymbol || !tokensText) {
+        document.getElementById('result').innerText = 'Preencha todos os campos.';
+        return;
+      }
+      
+      const grammar = parseGrammar(grammarText);
+      const tokens = parseTokens(tokensText);
+      
+      const acceptedItem = earleyParse(grammar, startSymbol, tokens);
+      if (acceptedItem) {
+        // O item aceito S' contém, em children[0], a árvore de derivação para o símbolo inicial.
+        let derivationSteps = [];
+        if (acceptedItem.children.length > 0) {
+          derivationSteps = generateDerivationSteps(acceptedItem.children[0]);
+        }
+        let output = 'Sequência válida segundo a gramática.\n\nDerivação:\n';
+        output += derivationSteps.join("\n");
+        document.getElementById('result').innerText = output;
+      } else {
+        document.getElementById('result').innerText = 'Sequência inválida segundo a gramática.';
+      }
+    }
+    
+    // Função para gerar uma URL compartilhável com o estado atual dos editores.
+    function share() {
+      const grammarText = document.getElementById('grammar').value;
+      const startSymbol = document.getElementById('startSymbol').value;
+      const tokensText = document.getElementById('tokens').value;
+      const baseUrl = window.location.href.split('?')[0];
+      const url = baseUrl + '?grammar=' + encodeURIComponent(grammarText)
+                  + '&start=' + encodeURIComponent(startSymbol)
+                  + '&tokens=' + encodeURIComponent(tokensText);
+      prompt("Compartilhe este URL:", url);
+    }
+    
+    // Ao carregar a página, verifica se há parâmetros na URL para inicializar os editores.
+    window.onload = function() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('grammar')) {
+        document.getElementById('grammar').value = params.get('grammar');
+      }
+      if (params.has('start')) {
+        document.getElementById('startSymbol').value = params.get('start');
+      }
+      if (params.has('tokens')) {
+        document.getElementById('tokens').value = params.get('tokens');
+      }
+    }
+    
+    // Anexa as funções ao objeto global para que possam ser chamadas pelos atributos onclick.
+    window.share = share;
+    window.parseInput = parseInput;
+  </script>
+</body>
+</html>
+
