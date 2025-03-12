@@ -1,6 +1,6 @@
 <?php 
    $title = 'Apresentação Disciplina Compiladores';
-   require('cabecalho.php');
+   require('../cabecalho.php');
 ?>
 
 
@@ -235,5 +235,5 @@
     </div>
 
 <?php
-   require('rodape.php');
+   require('../rodape.php');
 ?>

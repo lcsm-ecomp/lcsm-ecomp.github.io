@@ -42,7 +42,11 @@
   color: #0277BD; /* Cor do texto do código */
   overflow-x: auto; /* Permite rolagem horizontal para código longo */
   white-space: pre-wrap; /* Quebra de linha automática */
-}    
+}
+.hljs {
+  background-color: #E1F5FE;
+  color: black;
+}
     </style>
   </head>
   <body>
